@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "id": "quickcarpet-fixes",
+  "version": "${version}",
+  "name": "QuickCarpet Fixes",
+  "description": "The quickcarpet extension to fix all vanilla minecraft bugs. Port of carpet-fixes to quickcarpet",
+  "authors": [
+    "FX - PR0CESS, ..."
+  ],
+  "contact": {
+    "homepage": "https://github.com/fxmorin/quickcarpet-fixes",
+    "sources": "https://github.com/fxmorin/quickcarpet-fixes",
+    "issues": "https://github.com/fxmorin/quickcarpet-fixes/issues"
+  },
+
+  "license": "MIT",
+  "icon": "assets/quickcarpet-fixes/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "quickcarpetfixes.QuickCarpetFixesServer"
+    ]
+  },
+  "mixins": [
+    "quickcarpet-fixes.mixins.json"
+  ],
+  "accessWidener" : "quickcarpet-fixes.accesswidener",
+  "depends": {
+    "minecraft": "1.18.2",
+    "fabricloader": ">=0.11.3",
+    "quickcarpet": ">=3.3.0",
+    "java": ">=16"
+  },
+  "custom": {
+    "modmenu": {
+      "parent": "quickcarpet"
+    }
+  }
+}

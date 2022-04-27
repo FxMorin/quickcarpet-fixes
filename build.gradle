@@ -1,0 +1,100 @@
+plugins {
+	id 'fabric-loom' version '0.12-SNAPSHOT'
+	id 'io.github.juuxel.loom-quiltflower' version '1.6.0'
+	id 'maven-publish'
+}
+
+repositories {
+	allprojects {
+		repositories {
+			maven {
+				name 'Jitpack'
+				url 'https://jitpack.io'
+			}
+			maven {
+				name 'Skyrising'
+				url 'https://maven.skyrising.xyz'
+			}
+		}
+	}
+    mavenCentral()
+}
+
+sourceCompatibility = JavaVersion.VERSION_17
+targetCompatibility = JavaVersion.VERSION_17
+
+archivesBaseName = project.archives_base_name
+version = project.display_minecraft_version+'-'+project.mod_version+'+v'+new Date().format('yyMMdd')
+group = project.maven_group
+
+sourceSets {
+	main {
+		java {
+			compileClasspath += main.compileClasspath
+			runtimeClasspath += main.compileClasspath
+		}
+	}
+}
+
+loom {
+	accessWidenerPath = file("src/main/resources/quickcarpet-fixes.accesswidener")
+}
+
+dependencies {
+    //to change the versions see the gradle.properties file
+	minecraft "com.mojang:minecraft:${project.minecraft_version}"
+	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+
+	modCompileOnly "quickcarpet:quickcarpet-api:${project.quickcarpet_api_core_version}"
+
+	include "com.github.LlamaLad7:MixinExtras:${project.mixinextras_version}"
+	implementation("com.github.LlamaLad7:MixinExtras:${project.mixinextras_version}")
+	annotationProcessor("com.github.LlamaLad7:MixinExtras:${project.mixinextras_version}")
+
+	modRuntimeOnly "com.github.astei:lazydfu:0.1.2"
+}
+
+processResources {
+	inputs.property "version", project.version
+
+	filesMatching("fabric.mod.json") {
+		expand "version": project.version
+	}
+}
+
+tasks.withType(JavaCompile).configureEach {
+	it.options.encoding = "UTF-8"
+	it.options.release = 16
+}
+
+java {
+	withSourcesJar()
+}
+
+jar {
+	from("LICENSE") {
+		rename { "${it}_${project.archivesBaseName}"}
+	}
+}
+
+// configure the maven publication
+publishing {
+	publications {
+		mavenJava(MavenPublication) {
+			// add all the jars that should be included when publishing to maven
+			artifact(jar) {
+				builtBy remapJar
+			}
+			artifact(sourcesJar) {
+				builtBy remapSourcesJar
+			}
+		}
+	}
+
+	// select the repositories you want to publish to
+	repositories {
+		// uncomment to publish to the local maven
+		// mavenLocal()
+	}
+}
