@@ -7,7 +7,7 @@
 ![Latest Minecraft Version](https://img.shields.io/badge/Latest%20MC%20Support-1.18.2-green?style=flat-square)
 [![Mod License](https://img.shields.io/github/license/fxmorin/quickcarpet-fixes?style=flat-square)](https://github.com/fxmorin/quickcarpet-fixes/blob/master/LICENSE)
 
-[QuickCarpet](https://github.com/QuickCarpet/QuickCarpet) extension mod which attempts to fix as many vanilla minecraft bugs as possible!
+[QuickCarpet](https://github.com/QuickCarpet/QuickCarpet) extension mod which attempts to fix as many vanilla minecraft bugs as possible!  
 This Mod is a port of [Carpet-Fixes](https://github.com/fxmorin/carpet-fixes) although for [QuickCarpet](https://github.com/QuickCarpet/QuickCarpet) instead of [Fabric Carpet](https://github.com/gnembon/fabric-carpet)
 
 If you enjoy the mod, help me out by giving this project a star, thanks.
